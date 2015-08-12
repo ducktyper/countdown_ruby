@@ -1,15 +1,15 @@
 class Store
   def initialize
-    @items = []
+    @products = []
   end
 
-  def register_item(barcode, name, price)
-    new_item = [barcode, name, price]
-    @items << new_item
+  def register_product(barcode, name, price)
+    new_product = [barcode, name, price]
+    @products << new_product
   end
 
-  def item_count
-    @items.size
+  def product_count
+    @products.size
   end
 
 end
