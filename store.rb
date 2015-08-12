@@ -1,0 +1,7 @@
+class Store
+
+  def item_count
+    0
+  end
+
+end
