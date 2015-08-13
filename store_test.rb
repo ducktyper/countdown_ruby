@@ -69,4 +69,11 @@ describe "store" do
     assert_equal expect, store.purchase_summary
   end
 
+  it "can set discount to a product" do
+    store = Store.new
+    store.register_product("001", "apple", 10)
+    store.set_discount_to_product("001", 1)
+    assert_equal 9, store.calculate_cost(["001"])
+  end
+
 end
