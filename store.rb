@@ -12,7 +12,7 @@ class Store
       @product_array.delete(existing_product)
     end
 
-    new_product = [barcode, name, price]
+    new_product = {"barcode" => barcode, "name" => name, "price" => price}
     @product_array << new_product
   end
 
