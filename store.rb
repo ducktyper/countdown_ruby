@@ -5,6 +5,11 @@ class Store
   end
 
   def register_product(barcode, name, price)
+    existing_product = @product_array.find {|product| product[0] == barcode}
+    if existing_product
+      @product_array.delete(existing_product)
+    end
+
     new_product = [barcode, name, price]
     @product_array << new_product
   end
