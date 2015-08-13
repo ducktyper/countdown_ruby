@@ -1,6 +1,7 @@
 class Store
   def initialize
     @products = []
+    @purchases = []
   end
 
   def register_product(barcode, name, price)
@@ -31,6 +32,11 @@ class Store
     end
     result = result + "total $#{calculate_cost(barcodes)}"
     result
+  end
+
+  def purchase(barcodes_array)
+    @purchases << barcodes_array
+    receipt(barcodes_array)
   end
 
 end
