@@ -25,9 +25,9 @@ class Store
     barcode_array.each do |barcode|
       product = @product_array.find {|product| product["barcode"] == barcode}
       cost = cost + product["price"]
-      discount = @discount_array.find {|discount| discount[0] == barcode}
+      discount = @discount_array.find {|discount| discount["barcode"] == barcode}
       if discount
-        cost = cost - discount[1]
+        cost = cost - discount["amount"]
       end
     end
     cost
@@ -43,10 +43,10 @@ class Store
     end
     barcode_array.each do |barcode|
       product = @product_array.find {|product| product["barcode"] == barcode}
-      discount = @discount_array.find {|discount| discount[0] == barcode}
+      discount = @discount_array.find {|discount| discount["barcode"] == barcode}
       if discount
         name = product["name"]
-        amount = discount[1]
+        amount = discount["amount"]
         result = result + "#{name} -$#{amount}\n"
       end
     end
@@ -74,7 +74,7 @@ class Store
   end
 
   def set_discount_to_product(barcode, amount)
-    discount = @discount_array.find {|discount| discount[0] == barcode}
+    discount = @discount_array.find {|discount| discount["barcode"] == barcode}
     if discount
       @discount_array.delete(discount)
     end
