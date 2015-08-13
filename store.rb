@@ -39,4 +39,15 @@ class Store
     receipt(barcodes_array)
   end
 
+  def purchase_summary
+    result_array = []
+    result_array << ["Number of Products", "Cost"]
+    @purchase_array.each do |barcodes_array|
+      n_products = barcodes_array.size
+      cost       = calculate_cost(barcodes_array)
+      result_array << [n_products, cost]
+    end
+    result_array
+  end
+
 end
