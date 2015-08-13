@@ -6,23 +6,18 @@ class Store
   end
 
   def register_product(barcode, name, price)
-    existing_product = @product_array.find {|product| product["barcode"] == barcode}
-    if existing_product
-      @product_array.delete(existing_product)
-    end
-
     new_product = {"barcode" => barcode, "name" => name, "price" => price}
     @product_hash[barcode] = new_product
   end
 
   def product_count
-    @product_array.size
+    @product_hash.size
   end
 
   def calculate_cost(barcode_array)
     cost = 0
     barcode_array.each do |barcode|
-      product = @product_array.find {|product| product["barcode"] == barcode}
+      product = @product_hash[barcode]
       cost = cost + product["price"]
       discount = @discount_array.find {|discount| discount["barcode"] == barcode}
       if discount
@@ -35,13 +30,13 @@ class Store
   def receipt(barcode_array)
     result = ""
     barcode_array.each do |barcode|
-      product = @product_array.find {|product| product["barcode"] == barcode}
+      product = @product_hash[barcode]
       name = product["name"]
       cost = product["price"]
       result = result + "#{name} $#{cost}\n"
     end
     barcode_array.each do |barcode|
-      product = @product_array.find {|product| product["barcode"] == barcode}
+      product = @product_hash[barcode]
       discount = @discount_array.find {|discount| discount["barcode"] == barcode}
       if discount
         name = product["name"]
