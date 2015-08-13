@@ -95,4 +95,14 @@ describe "store" do
     assert_equal expect, store.purchase(["001", "002"])
   end
 
+  it "can set 0 discount to clear previous one" do
+    store = Store.new
+    store.register_product("001", "apple", 10)
+    store.register_product("002", "orange", 20)
+    store.set_discount_to_product("001", 1)
+    store.set_discount_to_product("001", 0)
+    expect = "apple $10\norange $20\ntotal $30"
+    assert_equal expect, store.purchase(["001", "002"])
+  end
+
 end
