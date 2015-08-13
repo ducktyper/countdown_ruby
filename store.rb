@@ -74,6 +74,9 @@ class Store
     if discount
       @discount_array.delete(discount)
     end
+    if amount == 0
+      return
+    end
     @discount_array << [barcode, amount]
   end
 
