@@ -34,4 +34,12 @@ describe "store" do
     assert_equal(expected, store.receipt(["001", "002"]))
   end
 
+  it "can purchase products with barcodes" do
+    store = Store.new
+    store.register_product("001", "apple", 10)
+    store.register_product("002", "orange", 20)
+    expected = "apple $10\norange $20\ntotal $30"
+    assert_equal expected, store.purchase(["001", "002"])
+  end
+
 end
