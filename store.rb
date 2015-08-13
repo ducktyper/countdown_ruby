@@ -70,6 +70,10 @@ class Store
   end
 
   def set_discount_to_product(barcode, amount)
+    discount = @discount_array.find {|discount| discount[0] == barcode}
+    if discount
+      @discount_array.delete(discount)
+    end
     @discount_array << [barcode, amount]
   end
 
