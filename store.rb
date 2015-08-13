@@ -2,7 +2,6 @@ class Store
   def initialize
     @product_array = []
     @purchase_array = []
-    @purchase_time_array = []
     @discount_array = []
   end
 
@@ -55,8 +54,8 @@ class Store
   end
 
   def purchase(barcode_array)
-    @purchase_array << barcode_array
     time_string = Time.now.strftime("%d/%m/%Y")
+    @purchase_array << {"purchase_time" => time_string, "barcode_array" => barcode_array}
     @purchase_time_array << time_string
     receipt(barcode_array)
   end
