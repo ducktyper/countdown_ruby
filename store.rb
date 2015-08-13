@@ -1,6 +1,6 @@
 class Store
   def initialize
-    @product_array = []
+    @product_hash = {}
     @purchase_array = []
     @discount_array = []
   end
@@ -12,7 +12,7 @@ class Store
     end
 
     new_product = {"barcode" => barcode, "name" => name, "price" => price}
-    @product_array << new_product
+    @product_hash[barcode] = new_product
   end
 
   def product_count
