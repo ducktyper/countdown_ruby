@@ -42,4 +42,17 @@ describe "store" do
     assert_equal expected, store.purchase(["001", "002"])
   end
 
+  it "shows purchase summary" do
+    store = Store.new
+    store.register_product("001", "apple", 10)
+    store.register_product("002", "orange", 20)
+    store.purchase(["001", "002"])
+    time = Time.now.strftime("%d/%m/%Y")
+    expect = [
+      ["Number of Products", "Cost"],
+      [2, 30]
+    ]
+    assert_equal expect, store.purchase_summary
+  end
+
 end
