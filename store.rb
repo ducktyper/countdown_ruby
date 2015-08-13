@@ -40,6 +40,15 @@ class Store
       cost = product[2]
       result = result + "#{name} $#{cost}\n"
     end
+    barcode_array.each do |barcode|
+      product = @product_array.find {|product| product[0] == barcode}
+      discount = @discount_array.find {|discount| discount[0] == barcode}
+      if discount
+        name = product[1]
+        amount = discount[1]
+        result = result + "#{name} -$#{amount}\n"
+      end
+    end
     result = result + "total $#{calculate_cost(barcode_array)}"
     result
   end
