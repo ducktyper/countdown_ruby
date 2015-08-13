@@ -2,6 +2,7 @@ class Store
   def initialize
     @product_array = []
     @purchase_array = []
+    @purchase_time_array = []
     @discount_array = []
   end
 
@@ -55,16 +56,19 @@ class Store
 
   def purchase(barcodes_array)
     @purchase_array << barcodes_array
+    time_string = Time.now.strftime("%d/%m/%Y")
+    @purchase_time_array << time_string
     receipt(barcodes_array)
   end
 
   def purchase_summary
     result_array = []
-    result_array << ["Number of Products", "Cost"]
-    @purchase_array.each do |barcodes_array|
+    result_array << ["Time", "Number of Products", "Cost"]
+    @purchase_array.each_with_index do |barcodes_array, index|
       n_products = barcodes_array.size
+      time       = @purchase_time_array[index]
       cost       = calculate_cost(barcodes_array)
-      result_array << [n_products, cost]
+      result_array << [time, n_products, cost]
     end
     result_array
   end
