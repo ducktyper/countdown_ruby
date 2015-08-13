@@ -19,6 +19,20 @@ describe "store" do
     assert_equal(1, store.product_count())
   end
 
+  it "can register product again to update" do
+    store = Store.new
+
+    barcode = "001"
+    name    = "apple"
+    price   = 5
+
+    store.register_product(barcode, name, price)
+    store.register_product(barcode, "jass apple", 10)
+    assert_equal(1, store.product_count())
+    expected = "jass apple $10\ntotal $10"
+    assert_equal expected, store.purchase(["001"])
+  end
+
   it "can caculate total cost of given barcodes" do
     store = Store.new
     store.register_product("001", "apple", 10)
