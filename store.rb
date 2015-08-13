@@ -21,4 +21,16 @@ class Store
     cost
   end
 
+  def receipt(barcodes)
+    result = ""
+    barcodes.each do |barcode|
+      product = @products.find {|product| product[0] == barcode}
+      name = product[1]
+      cost = product[2]
+      result = result + "#{name} $#{cost}\n"
+    end
+    result = result + "total $#{calculate_cost(barcodes)}"
+    result
+  end
+
 end
