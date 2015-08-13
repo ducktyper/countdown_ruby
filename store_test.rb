@@ -76,4 +76,13 @@ describe "store" do
     assert_equal 9, store.calculate_cost(["001"])
   end
 
+  it "shows discount to receipt" do
+    store = Store.new
+    store.register_product("001", "apple", 10)
+    store.register_product("002", "orange", 20)
+    store.set_discount_to_product("001", 1)
+    expect = "apple $10\norange $20\napple -$1\ntotal $29"
+    assert_equal expect, store.purchase(["001", "002"])
+  end
+
 end
