@@ -12,4 +12,13 @@ class Store
     @products.size
   end
 
+  def calculate_cost(barcodes)
+    cost = 0
+    barcodes.each do |barcode|
+      product = @products.find {|product| product[0] == barcode}
+      cost = cost + product[2]
+    end
+    cost
+  end
+
 end
