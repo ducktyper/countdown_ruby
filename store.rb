@@ -2,6 +2,7 @@ class Store
   def initialize
     @product_array = []
     @purchase_array = []
+    @discount_array = []
   end
 
   def register_product(barcode, name, price)
@@ -23,6 +24,10 @@ class Store
     barcode_array.each do |barcode|
       product = @product_array.find {|product| product[0] == barcode}
       cost = cost + product[2]
+      discount = @discount_array.find {|discount| discount[0] == barcode}
+      if discount
+        cost = cost - discount[1]
+      end
     end
     cost
   end
@@ -53,6 +58,10 @@ class Store
       result_array << [n_products, cost]
     end
     result_array
+  end
+
+  def set_discount_to_product(barcode, amount)
+    @discount_array << [barcode, amount]
   end
 
 end
