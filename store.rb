@@ -81,7 +81,7 @@ class Store
     if amount == 0
       return
     end
-    @discount_array << [barcode, amount]
+    @discount_array << {"barcode" => barcode, "amount" => amount}
   end
 
 end
