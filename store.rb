@@ -2,7 +2,7 @@ class Store
   def initialize
     @product_hash = {}
     @purchase_array = []
-    @discount_array = []
+    @discount_hash = {}
   end
 
   def register_product(barcode, name, price)
@@ -74,7 +74,7 @@ class Store
     if amount == 0
       return
     end
-    @discount_array << {"barcode" => barcode, "amount" => amount}
+    @discount_hash[barcode] = {"barcode" => barcode, "amount" => amount}
   end
 
 end
