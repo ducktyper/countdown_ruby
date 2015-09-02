@@ -8,17 +8,22 @@ class Store
   end
 
   def register_product(barcode, name, price)
-    Product.create("barcode" => barcode, "name" => name, "price" => price)
+    product = Product.find_by("barcode" => barcode)
+    if product == nil
+      Product.create("barcode" => barcode, "name" => name, "price" => price)
+    else
+      product.update("barcode" => barcode, "name" => name, "price" => price)
+    end
   end
 
   def product_count
-    @product_hash.size
+    Product.count
   end
 
   def calculate_cost(barcode_array)
     cost = 0
     barcode_array.each do |barcode|
-      product = @product_hash[barcode]
+      product = Product.find_by("barcode" => barcode)
       cost = cost + product.price
       discount = @discount_hash[barcode]
       if discount
@@ -31,13 +36,13 @@ class Store
   def receipt(barcode_array)
     result = ""
     barcode_array.each do |barcode|
-      product = @product_hash[barcode]
+      product = Product.find_by("barcode" => barcode)
       name = product.name
       cost = product.price
       result = result + "#{name} #{format_money cost}\n"
     end
     barcode_array.each do |barcode|
-      product = @product_hash[barcode]
+      product = Product.find_by("barcode" => barcode)
       discount = @discount_hash[barcode]
       if discount
         name = product.name
