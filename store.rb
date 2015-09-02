@@ -1,18 +1,4 @@
-class Product
-  def initialize(barcode, name, price)
-    @barcode = barcode
-    @name    = name
-    @price   = price
-  end
-  def barcode
-    @barcode
-  end
-  def name
-    @name
-  end
-  def price
-    @price
-  end
+class Product < ActiveRecord::Base
 end
 
 class Store
@@ -23,7 +9,7 @@ class Store
   end
 
   def register_product(barcode, name, price)
-    new_product = Product.new(barcode, name, price)
+    new_product = Product.new("barcode" => barcode, "name" => name, "price" => price)
     @product_hash[barcode] = new_product
   end
 
