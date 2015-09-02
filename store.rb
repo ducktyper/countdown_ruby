@@ -3,14 +3,12 @@ end
 
 class Store
   def initialize
-    @product_hash = {}
     @purchase_array = []
     @discount_hash = {}
   end
 
   def register_product(barcode, name, price)
-    new_product = Product.new("barcode" => barcode, "name" => name, "price" => price)
-    @product_hash[barcode] = new_product
+    Product.create("barcode" => barcode, "name" => name, "price" => price)
   end
 
   def product_count

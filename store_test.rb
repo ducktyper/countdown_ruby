@@ -14,6 +14,9 @@ ActiveRecord::Schema.define do
 end
 
 describe "store" do
+  before(:each) do
+    Product.delete_all
+  end
 
   it "starts with 0 product" do
     store = Store.new
