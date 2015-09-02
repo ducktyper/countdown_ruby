@@ -33,7 +33,7 @@ class Store
       product = @product_hash[barcode]
       name = product["name"]
       cost = product["price"]
-      result = result + "#{name} $#{cost}\n"
+      result = result + "#{name} $%.2f\n" % cost
     end
     barcode_array.each do |barcode|
       product = @product_hash[barcode]
@@ -41,10 +41,10 @@ class Store
       if discount
         name = product["name"]
         amount = discount["amount"]
-        result = result + "#{name} -$#{amount}\n"
+        result = result + "#{name} -$%.2f\n" % amount
       end
     end
-    result = result + "total $#{calculate_cost(barcode_array)}"
+    result = result + "total $%.2f" % calculate_cost(barcode_array)
     result
   end
 
