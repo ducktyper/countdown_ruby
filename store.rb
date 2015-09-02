@@ -6,7 +6,6 @@ end
 class Store
   def initialize
     @purchase_array = []
-    @discount_hash = {}
   end
 
   def register_product(barcode, name, price)
