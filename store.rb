@@ -1,7 +1,16 @@
 class Product < ActiveRecord::Base
 end
 class Discount
-  # Complete here
+  def initialize(barcode, amount)
+    @barcode = barcode
+    @amount = amount
+  end
+  def barcode
+    @barcode
+  end
+  def amount
+    @amount
+  end
 end
 
 class Store
@@ -30,7 +39,7 @@ class Store
       cost = cost + product.price
       discount = @discount_hash[barcode]
       if discount
-        cost = cost - discount["amount"]
+        cost = cost - discount.amount
       end
     end
     cost
@@ -49,7 +58,7 @@ class Store
       discount = @discount_hash[barcode]
       if discount
         name = product.name
-        amount = discount["amount"]
+        amount = discount.amount
         result = result + "#{name} -#{format_money amount}\n"
       end
     end
