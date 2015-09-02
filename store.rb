@@ -4,16 +4,9 @@ class Product < ActiveRecord::Base
 end
 class Discount < ActiveRecord::Base
 end
-class Purchase
-  def initialize(purchase_time, barcode_array)
-    @purchase_time = purchase_time
-    @barcode_array = barcode_array
-  end
-  def purchase_time
-    @purchase_time
-  end
+class Purchase < ActiveRecord::Base
   def barcode_array
-    @barcode_array
+    JSON.parse(barcode_array_string)
   end
 end
 
