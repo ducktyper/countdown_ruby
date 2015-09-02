@@ -29,7 +29,7 @@ describe "store" do
     store.register_product(barcode, name, price)
     store.register_product(barcode, "jass apple", 10)
     assert_equal(1, store.product_count())
-    expected = "jass apple $10\ntotal $10"
+    expected = "jass apple $10.00\ntotal $10.00"
     assert_equal expected, store.purchase(["001"])
   end
 
@@ -44,7 +44,7 @@ describe "store" do
     store = Store.new
     store.register_product("001", "apple", 10)
     store.register_product("002", "orange", 20)
-    expected = "apple $10\norange $20\ntotal $30"
+    expected = "apple $10.00\norange $20.00\ntotal $30.00"
     assert_equal(expected, store.receipt(["001", "002"]))
   end
 
@@ -52,7 +52,7 @@ describe "store" do
     store = Store.new
     store.register_product("001", "apple", 10)
     store.register_product("002", "orange", 20)
-    expected = "apple $10\norange $20\ntotal $30"
+    expected = "apple $10.00\norange $20.00\ntotal $30.00"
     assert_equal expected, store.purchase(["001", "002"])
   end
 
@@ -81,7 +81,7 @@ describe "store" do
     store.register_product("001", "apple", 10)
     store.register_product("002", "orange", 20)
     store.set_discount_to_product("001", 1)
-    expect = "apple $10\norange $20\napple -$1\ntotal $29"
+    expect = "apple $10.00\norange $20.00\napple -$1.00\ntotal $29.00"
     assert_equal expect, store.purchase(["001", "002"])
   end
 
@@ -91,7 +91,7 @@ describe "store" do
     store.register_product("002", "orange", 20)
     store.set_discount_to_product("001", 1)
     store.set_discount_to_product("001", 2)
-    expect = "apple $10\norange $20\napple -$2\ntotal $28"
+    expect = "apple $10.00\norange $20.00\napple -$2.00\ntotal $28.00"
     assert_equal expect, store.purchase(["001", "002"])
   end
 
@@ -101,7 +101,7 @@ describe "store" do
     store.register_product("002", "orange", 20)
     store.set_discount_to_product("001", 1)
     store.set_discount_to_product("001", 0)
-    expect = "apple $10\norange $20\ntotal $30"
+    expect = "apple $10.00\norange $20.00\ntotal $30.00"
     assert_equal expect, store.purchase(["001", "002"])
   end
 
