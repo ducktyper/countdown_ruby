@@ -1,3 +1,20 @@
+class Product
+  def initialize(barcode, name, price)
+    @barcode = barcode
+    @name    = name
+    @price   = price
+  end
+  def barcode
+    @barcode
+  end
+  def name
+    @name
+  end
+  def price
+    @price
+  end
+end
+
 class Store
   def initialize
     @product_hash = {}
@@ -6,7 +23,7 @@ class Store
   end
 
   def register_product(barcode, name, price)
-    new_product = {"barcode" => barcode, "name" => name, "price" => price}
+    new_product = Product.new(barcode, name, price)
     @product_hash[barcode] = new_product
   end
 
