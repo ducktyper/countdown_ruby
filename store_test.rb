@@ -25,6 +25,7 @@ describe "store" do
   before(:each) do
     Product.delete_all
     Discount.delete_all
+    Purchase.delete_all
   end
 
   it "starts with 0 product" do

@@ -60,7 +60,7 @@ class Store
 
   def purchase(barcode_array)
     time_string = Time.now.strftime("%d/%m/%Y")
-    @purchase_array << Purchase.new(
+    Purchase.create(
       purchase_time:        time_string,
       barcode_array_string: JSON.generate(barcode_array) # convert array to string
     )
@@ -70,7 +70,7 @@ class Store
   def purchase_summary
     result_array = []
     result_array << ["Time", "Number of Products", "Cost"]
-    @purchase_array.each do |purchase|
+    Purchase.all.each do |purchase|
       n_products = purchase.barcode_array.size
       time       = purchase.purchase_time
       cost       = calculate_cost(purchase.barcode_array)
