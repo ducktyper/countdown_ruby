@@ -11,10 +11,6 @@ class Purchase < ActiveRecord::Base
 end
 
 class Store
-  def initialize
-    @purchase_array = []
-  end
-
   def register_product(barcode, name, price)
     product = Product.find_by("barcode" => barcode)
     if product == nil
