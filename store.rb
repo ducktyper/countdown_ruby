@@ -2,6 +2,12 @@ class Product < ActiveRecord::Base
 end
 class Discount < ActiveRecord::Base
 end
+class Purchase
+  def initialize(purchase_time, barcode_array)
+    # Complete here
+  end
+  # Complete here
+end
 
 class Store
   def initialize
@@ -57,7 +63,7 @@ class Store
 
   def purchase(barcode_array)
     time_string = Time.now.strftime("%d/%m/%Y")
-    @purchase_array << {"purchase_time" => time_string, "barcode_array" => barcode_array}
+    @purchase_array << Purchase.new(time_string, barcode_array)
     receipt(barcode_array)
   end
 
