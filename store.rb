@@ -1,5 +1,8 @@
 class Product < ActiveRecord::Base
 end
+class Discount
+  # Complete here
+end
 
 class Store
   def initialize
@@ -77,7 +80,7 @@ class Store
       @discount_hash.delete(barcode)
       return
     end
-    @discount_hash[barcode] = {"barcode" => barcode, "amount" => amount}
+    @discount_hash[barcode] = Discount.new(barcode, amount)
   end
 
   def format_money(amount)
