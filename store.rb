@@ -74,4 +74,8 @@ class Store
     @discount_hash[barcode] = {"barcode" => barcode, "amount" => amount}
   end
 
+  def format_money(amount)
+    "$%.2f" % amount
+  end
+
 end
