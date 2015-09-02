@@ -1,5 +1,17 @@
 require 'minitest/autorun'
+require 'active_record'
 require './store'
+
+ActiveRecord::Base.establish_connection adapter: "sqlite3", database: ":memory:"
+ActiveRecord::Schema.verbose = false
+ActiveRecord::Base.time_zone_aware_attributes = true
+ActiveRecord::Schema.define do
+  create_table "products" do |t|
+    t.string   "barcode",       limit: 255
+    t.string   "name",          limit: 255
+    t.decimal  "price",         precision: 8, scale: 2
+  end
+end
 
 describe "store" do
 
