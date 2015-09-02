@@ -1,3 +1,5 @@
+require 'json'
+
 class Product < ActiveRecord::Base
 end
 class Discount < ActiveRecord::Base
@@ -69,7 +71,10 @@ class Store
 
   def purchase(barcode_array)
     time_string = Time.now.strftime("%d/%m/%Y")
-    @purchase_array << Purchase.new(time_string, barcode_array)
+    @purchase_array << Purchase.new(
+      purchase_time:        time_string,
+      barcode_array_string: JSON.generate(barcode_array) # convert array to string
+    )
     receipt(barcode_array)
   end
 
