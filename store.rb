@@ -26,7 +26,7 @@ class Store
     barcode_array.each do |barcode|
       product = Product.find_by("barcode" => barcode)
       cost = cost + product.price
-      discount = @discount_hash[barcode]
+      discount = Discount.find_by("barcode" => barcode)
       if discount
         cost = cost - discount.amount
       end
@@ -44,7 +44,7 @@ class Store
     end
     barcode_array.each do |barcode|
       product = Product.find_by("barcode" => barcode)
-      discount = @discount_hash[barcode]
+      discount = Discount.find_by("barcode" => barcode)
       if discount
         name = product.name
         amount = discount.amount
@@ -74,11 +74,18 @@ class Store
   end
 
   def set_discount_to_product(barcode, amount)
+    discount = Discount.find_by("barcode" => barcode)
     if amount == 0
-      @discount_hash.delete(barcode)
+      if discount != nil
+        discount.delete()
+      end
       return
     end
-    @discount_hash[barcode] = Discount.new("barcode" => barcode, "amount" => amount)
+    if discount == nil
+      Discount.create("barcode" => barcode, "amount" => amount)
+    else
+      discount.update("barcode" => barcode, "amount" => amount)
+    end
   end
 
   def format_money(amount)
