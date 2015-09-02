@@ -4,9 +4,15 @@ class Discount < ActiveRecord::Base
 end
 class Purchase
   def initialize(purchase_time, barcode_array)
-    # Complete here
+    @purchase_time = purchase_time
+    @barcode_array = barcode_array
   end
-  # Complete here
+  def purchase_time
+    @purchase_time
+  end
+  def barcode_array
+    @barcode_array
+  end
 end
 
 class Store
@@ -71,9 +77,9 @@ class Store
     result_array = []
     result_array << ["Time", "Number of Products", "Cost"]
     @purchase_array.each do |purchase|
-      n_products = purchase["barcode_array"].size
-      time       = purchase["purchase_time"]
-      cost       = calculate_cost(purchase["barcode_array"])
+      n_products = purchase.barcode_array.size
+      time       = purchase.purchase_time
+      cost       = calculate_cost(purchase.barcode_array)
       result_array << [time, n_products, cost]
     end
     result_array
