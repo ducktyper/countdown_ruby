@@ -12,7 +12,7 @@ ActiveRecord::Schema.define do
     t.decimal  "price",         precision: 8, scale: 2
   end
   create_table "discounts" do |t|
-    t.string   "barcode",       limit: 255
+    t.integer  "product_id",    limit: 4
     t.decimal  "amount",        precision: 8, scale: 2
   end
   create_table "purchases" do |t|

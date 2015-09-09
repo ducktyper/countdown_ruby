@@ -3,6 +3,7 @@ require 'json'
 class Product < ActiveRecord::Base
 end
 class Discount < ActiveRecord::Base
+  # TODO: set one to one relationship to product
 end
 class Purchase < ActiveRecord::Base
   has_and_belongs_to_many :products
