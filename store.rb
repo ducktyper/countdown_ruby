@@ -5,10 +5,13 @@ end
 class Discount < ActiveRecord::Base
 end
 class Purchase < ActiveRecord::Base
-  # TODO: set many to many relationship to products
+  has_and_belongs_to_many :products
   def barcode_array
-    # TODO: get barcode array from products
-    JSON.parse(barcode_array_string)
+    array = []
+    products.each do |product|
+      array << product.barcode
+    end
+    array
   end
 end
 
@@ -62,9 +65,16 @@ class Store
 
   def purchase(barcode_array)
     time_string = Time.now.strftime("%d/%m/%Y")
+
+    products = []
+    barcode_array.each do |barcode|
+      product = Product.find_by("barcode" => barcode)
+      products << product
+    end
+
     Purchase.create(
-      purchase_time:        time_string,
-      barcode_array_string: JSON.generate(barcode_array) # convert array to string
+      purchase_time: time_string,
+      products:      products
     )
     receipt(barcode_array)
   end
