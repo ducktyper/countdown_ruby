@@ -3,7 +3,7 @@ require 'json'
 class Product < ActiveRecord::Base
 end
 class Discount < ActiveRecord::Base
-  # TODO: set one to one relationship to product
+  belongs_to :product
 end
 class Purchase < ActiveRecord::Base
   has_and_belongs_to_many :products
@@ -35,7 +35,7 @@ class Store
     barcode_array.each do |barcode|
       product = Product.find_by("barcode" => barcode)
       cost = cost + product.price
-      discount = Discount.find_by("barcode" => barcode)
+      discount = Discount.find_by("product" => product)
       if discount
         cost = cost - discount.amount
       end
@@ -53,7 +53,7 @@ class Store
     end
     barcode_array.each do |barcode|
       product = Product.find_by("barcode" => barcode)
-      discount = Discount.find_by("barcode" => barcode)
+      discount = Discount.find_by("product" => product)
       if discount
         name = product.name
         amount = discount.amount
@@ -94,7 +94,8 @@ class Store
   end
 
   def set_discount_to_product(barcode, amount)
-    discount = Discount.find_by("barcode" => barcode)
+    product = Product.find_by("barcode" => barcode)
+    discount = Discount.find_by("product" => product)
     if amount == 0
       if discount != nil
         discount.delete()
@@ -102,9 +103,9 @@ class Store
       return
     end
     if discount == nil
-      Discount.create("barcode" => barcode, "amount" => amount)
+      Discount.create("product" => product, "amount" => amount)
     else
-      discount.update("barcode" => barcode, "amount" => amount)
+      discount.update("product" => product, "amount" => amount)
     end
   end
 
