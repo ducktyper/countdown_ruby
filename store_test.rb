@@ -16,7 +16,8 @@ ActiveRecord::Schema.define do
     t.decimal  "amount",        precision: 8, scale: 2
   end
   create_table "purchases" do |t|
-    t.string "purchase_time"
+    t.string   "purchase_time"
+    t.decimal  "total_cost",    precision: 8, scale: 2
   end
   create_table "products_purchases", id: false do |t|
     t.integer  "product_id",    limit: 4

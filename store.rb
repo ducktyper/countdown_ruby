@@ -85,7 +85,7 @@ class Store
     Purchase.all.each do |purchase|
       n_products = purchase.barcode_array.size
       time       = purchase.purchase_time
-      cost       = calculate_cost(purchase.barcode_array)
+      cost       = purchase.total_cost
       result_array << [time, n_products, cost]
     end
     result_array
