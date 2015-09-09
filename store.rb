@@ -5,7 +5,9 @@ end
 class Discount < ActiveRecord::Base
 end
 class Purchase < ActiveRecord::Base
+  # TODO: set many to many relationship to products
   def barcode_array
+    # TODO: get barcode array from products
     JSON.parse(barcode_array_string)
   end
 end

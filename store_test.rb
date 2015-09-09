@@ -17,7 +17,10 @@ ActiveRecord::Schema.define do
   end
   create_table "purchases" do |t|
     t.string "purchase_time"
-    t.text   "barcode_array_string"
+  end
+  create_table "products_purchases", id: false do |t|
+    t.integer  "product_id",    limit: 4
+    t.integer  "purchase_id",   limit: 4
   end
 end
 
