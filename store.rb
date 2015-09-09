@@ -74,7 +74,8 @@ class Store
 
     Purchase.create(
       purchase_time: time_string,
-      products:      products
+      products:      products,
+      total_cost:    calculate_cost(barcode_array)
     )
     receipt(barcode_array)
   end
